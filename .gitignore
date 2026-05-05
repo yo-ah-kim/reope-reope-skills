@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Local generated outputs
+board-reports/
+output/
+tmp/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.directory
