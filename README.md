@@ -2,16 +2,21 @@
 
 Source of truth for Reope's Claude skills. One directory per skill, each with a `SKILL.md`. Markdown only, no scripts, no secrets.
 
-## What lives here
+## Skills
 
 - `board/` — 4-advisor strategic deliberation (`/board <question>`)
-- (more skills to follow: deal-triage, new-deal, content, weekly-review)
+- `meeting-prep/` — Pre-meeting intelligence brief (`/meeting-prep <company>`)
+- `new-deal/` — Capture new deals from calendar and email activity (`/new-deal`)
+- `deal-triage/` — Interactive cleanup of stale HubSpot deals (`/deal-triage`)
+- `gtd/` — Friday GTD weekly review (`/gtd`)
+- `content/` — Blog post drafts from internal team conversations (`/content`)
+- `contact-cleanup/` — Score and demote off-ICP HubSpot marketing contacts (`/contact-cleanup`)
 
 ## What does NOT live here
 
-Sensitive context (financials, team CVs, client revenue, time stats) stays out of git, even private git. The `board` skill reads from `~/.claude/Board context/`, a local folder you populate per-machine. Set this up once, then the skill works.
+Sensitive context (financials, team CVs, client revenue, time stats, CRM schema) stays out of git, even private git. Skills read from two local folders you populate per-machine. Set these up once, then skills work.
 
-The Board context folder should contain:
+### `~/.claude/Board context/` (used by `/board`)
 
 - `00-REOPE-CONTEXT-START-HERE.md` — Index and company snapshot
 - `01-strategy.md` — REIMAGINE 2024-2027 strategy summary
@@ -23,25 +28,40 @@ The Board context folder should contain:
 
 These files are pre-digested from Drive sources so the board command runs instantly. Re-digest quarterly or after major strategic updates.
 
+### `~/.claude/Agent context/` (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`)
+
+- `guardrails.md` — Safety rules every CRM-writing skill reads first
+- `crm-schema.md` — HubSpot pipeline stages, IDs, deal properties, stage-specific talking points
+
+### `~/Assistant/` (output, not input)
+
+Skills write to:
+
+- `~/Assistant/content/posts/` — blog post drafts
+- `~/Assistant/content/log.md` — content topic history
+- `~/Assistant/gtd/snapshots/` — weekly plan snapshots for plan-vs-reality comparison
+
 ## How to use
 
 ### Locally in Claude Code
 
-Clone this repo, then symlink (or copy) the skill folders into your Claude skills directory:
+Clone this repo, then symlink the whole skills directory (or each skill folder individually):
 
 ```bash
-# Linux/Mac
+# Linux/Mac, symlink everything at once
 git clone git@github.com:yo-ah-kim/reope-reope-skills.git ~/code/reope-skills
-ln -s ~/code/reope-skills/board ~/.claude/skills/board
+ln -s ~/code/reope-skills ~/.claude/skills
 ```
 
 ```powershell
-# Windows
+# Windows, symlink each skill
 git clone git@github.com:yo-ah-kim/reope-reope-skills.git C:\code\reope-skills
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\skills\board" -Target "C:\code\reope-skills\board"
+foreach ($skill in @('board','meeting-prep','new-deal','deal-triage','gtd','content','contact-cleanup')) {
+  New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\skills\$skill" -Target "C:\code\reope-skills\$skill"
+}
 ```
 
-Verify by running `claude` and typing `/`. You should see `board` in the list.
+Verify by running `claude` and typing `/`. You should see all skills in the list.
 
 ### In Claude.ai (web and mobile)
 
