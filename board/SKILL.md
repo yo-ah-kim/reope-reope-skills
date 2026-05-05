@@ -133,7 +133,7 @@ Create a folder at `./ClaudeBoard/[decision-slug]/` where `[decision-slug]` is a
 
 A single self-contained HTML file (no external dependencies, all CSS/JS inline) with:
 
-- **Styling:** Reope brand theme — #242426 background, #2e2e30 cards with #3a3a3c borders, #fab120 accent, #8b7d3b olive/gold, #cf8a29 warm gold, #5a512a dark olive, white text. Font: SemplicitaPro (embed from `~/.claude/Board context/SemplicitaPro.otf` as base64 @font-face if present) with 'Segoe UI', system-ui fallbacks.
+- **Styling:** Reope brand theme — #242426 background, #2e2e30 cards with #3a3a3c borders, #fab120 accent, #8b7d3b olive/gold, #cf8a29 warm gold, #5a512a dark olive, white text. Font: clean system stack — `font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;`. No web fonts, no embeds.
 - **Vote tracker:** Visual Round 1 → Final comparison with change indicators
 - **Advisor cards:** Each advisor shows initials badge, lens, both rounds of argument, and votes
 - **Interactive sliders** for key assumptions relevant to the specific question (e.g., price, conversion rate, hours, timeline). Pick 3-5 sliders that matter most for this decision.
