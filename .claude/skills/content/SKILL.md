@@ -38,7 +38,7 @@ Also read the Reope positioning document from Google Drive (ID: `1cSF_ZmjSzXPzxA
 ## STEP 1: ASK FOR TIME WINDOW
 
 ```
-How far back should I look? (Default: 7 days)
+How far back should I look? (Default: 8 days)
 
 I'll scan:
 - Slack channels for interesting technical discussions
@@ -49,7 +49,7 @@ I'll scan:
 Looking for insights from your team — not just you.
 ```
 
-Wait for Joachim's answer. Use 7 days as default.
+Wait for Joachim's answer. Use 8 days as default.
 
 ## STEP 2: MINE SLACK FOR INSIGHTS
 
