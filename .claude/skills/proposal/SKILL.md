@@ -25,7 +25,7 @@ If any tool fails, report the error — do not fall back to other approaches.
 
 Fetch these from Google Drive using `read_file_content`:
 1. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules, banned-words list, voice/tone rules, language-matching rule
-2. `crm-schema.md` — Drive ID `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
+2. `crm-schema.md` — Drive ID `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
 
 ## INPUT
 
