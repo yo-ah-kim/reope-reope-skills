@@ -22,10 +22,11 @@ If any tool fails, report the error — do NOT fall back to web browsing.
 
 ## STEP 0: READ CONTEXT
 
-Read these files:
-1. `~/.claude/Agent context/guardrails.md` — Safety rules and voice rules (banned words list, "match language to audience", etc.)
+Fetch these from Google Drive using `read_file_content`:
+1. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules and voice rules (banned words list, "match language to audience", etc.)
+2. `crm-schema.md` — Drive ID `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` — Reference docs section lists the positioning doc's Drive ID
 
-Also read the Reope positioning document — its Google Drive file ID is recorded in `crm-schema.md` under "Reference docs" (look for `positioning_doc_id`). Use `read_file_content` to fetch it. The doc grounds all content in Reope's positioning:
+Then read the Reope positioning document — look up its Drive ID in `crm-schema.md` under "Reference docs" and fetch it with `read_file_content`. The doc grounds all content in Reope's positioning:
 
 **Positioning summary (for quick reference):**
 - **What Reope does:** Custom BIM software development — the customization layer for design software

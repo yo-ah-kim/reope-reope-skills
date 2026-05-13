@@ -29,10 +29,16 @@ Sensitive context (financials, team CVs, client revenue, time stats, CRM schema)
 
 These files are pre-digested from Drive sources so the board command runs instantly. Re-digest quarterly or after major strategic updates.
 
-### `~/.claude/Agent context/` (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`)
+### Google Drive — `Agent context/` folder (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`, `/proposal`)
 
-- `guardrails.md` — Safety rules every CRM-writing skill reads first (banned words, "never send, only draft", language-matching rule, Joachim's `hubspot_owner_id`)
-- `crm-schema.md` — HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage-specific talking points. **Ground truth — skills read pipeline IDs from here, not from inline copies.**
+Skills fetch these via the Google Drive MCP (`read_file_content`). The folder lives at the root of Joachim's My Drive: https://drive.google.com/drive/folders/105hQapsv9cbi4JqsfwHIDmJGKIzkc27J
+
+| File | Drive ID | Purpose |
+|---|---|---|
+| `crm-schema.md` | `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` | HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage talking points. **Ground truth for pipeline IDs.** |
+| `guardrails.md` | `145j9a9woeUFISskCmnT4xfWFus3E2WG2` | Safety rules every CRM/email-touching skill reads first (banned words, "never send, only draft", language-matching rule, Joachim's `hubspot_owner_id`) |
+
+Update the file in Drive when an ID changes — skills will pick it up on the next run. Don't duplicate the IDs into individual SKILL.md files.
 
 ### `~/Assistant/` (output, not input)
 

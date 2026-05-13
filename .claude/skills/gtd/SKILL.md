@@ -23,9 +23,9 @@ If any of these tools fail, report the error — do NOT fall back to web browsin
 
 ## STEP 0: READ CONTEXT
 
-Read these files:
-1. `~/.claude/Agent context/crm-schema.md` — Pipeline stage IDs (open/won/lost for Development and Toolbox), deal property names, portal ID, Joachim's `hubspot_owner_id`, stage talking points
-2. `~/.claude/Agent context/guardrails.md` — Safety rules (never send email, only draft; match language to contact)
+Fetch these from Google Drive using `read_file_content`:
+1. `crm-schema.md` — Drive ID `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` — Pipeline stage IDs (open/won/lost for Development and Toolbox), deal property names, portal ID, Joachim's `hubspot_owner_id`, stage talking points
+2. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules (never send email, only draft; match language to contact)
 
 These files are the source of truth for HubSpot IDs and rules. Do not hardcode IDs inline in this skill.
 

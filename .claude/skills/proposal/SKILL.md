@@ -23,9 +23,9 @@ If any tool fails, report the error — do not fall back to other approaches.
 
 ## STEP 0: READ CONTEXT
 
-Read these files:
-1. `~/.claude/Agent context/guardrails.md` — Safety rules, banned-words list, voice/tone rules, language-matching rule
-2. `~/.claude/Agent context/crm-schema.md` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
+Fetch these from Google Drive using `read_file_content`:
+1. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules, banned-words list, voice/tone rules, language-matching rule
+2. `crm-schema.md` — Drive ID `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
 
 ## INPUT
 

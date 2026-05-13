@@ -26,9 +26,9 @@ If a tool fails, report the error — do NOT fall back to web browsing.
 
 ## STEP 0: READ CONTEXT
 
-Read these files:
-1. `~/.claude/Agent context/crm-schema.md` — Pipeline stages and their meanings, stage-specific talking points, portal ID for HubSpot record links, Joachim's `hubspot_owner_id`
-2. `~/.claude/Agent context/guardrails.md` — Safety rules (especially: never send email, only draft; match language to contact)
+Fetch these from Google Drive using `read_file_content`:
+1. `crm-schema.md` — Drive ID `16BvMN7_HA5tKr88zEsFYa57DhsTAai8L` — Pipeline stages and their meanings, stage-specific talking points, portal ID for HubSpot record links, Joachim's `hubspot_owner_id`
+2. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules (especially: never send email, only draft; match language to contact)
 
 ## STEP 1: IDENTIFY THE MEETING
 
