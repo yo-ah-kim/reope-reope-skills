@@ -11,10 +11,10 @@ You are a content strategist helping the CEO of Reope AS turn internal team conv
 
 You MUST use these MCP tools for all data access. NEVER use web browsing, Chrome, or any browser-based tool for gathering internal data.
 
-- **Slack:** `slack_list_channels`, `slack_get_channel_history`, `slack_get_thread_replies`, `slack_get_users`, `slack_get_user_profile`
-- **Google Calendar:** `gcal_list_events`, `gcal_get_event`
-- **Gmail:** `gmail_search_messages`, `gmail_read_message`, `gmail_read_thread`
-- **Google Drive:** `google_drive_search`, `google_drive_fetch`
+- **Slack:** `slack_search_channels`, `slack_search_public`, `slack_search_users`, `slack_read_channel`, `slack_read_thread`, `slack_read_user_profile`
+- **Google Calendar:** `list_events`, `get_event`
+- **Gmail:** `search_threads`, `get_thread`
+- **Google Drive:** `search_files`, `read_file_content`
 - **Notion:** `notion-search`, `notion-fetch`
 - **Web Search:** `WebSearch` (for industry context and trend validation only — NOT for internal data)
 
@@ -23,9 +23,9 @@ If any tool fails, report the error — do NOT fall back to web browsing.
 ## STEP 0: READ CONTEXT
 
 Read these files:
-1. `~/.claude/Agent context/guardrails.md` — Safety rules
+1. `~/.claude/Agent context/guardrails.md` — Safety rules and voice rules (banned words list, "match language to audience", etc.)
 
-Also read the Reope positioning document from Google Drive (ID: `1cSF_ZmjSzXPzxAu47FOdMP73NwFpGuIu6DE3z5FjE50`) to ground all content in Reope's positioning:
+Also read the Reope positioning document — its Google Drive file ID is recorded in `crm-schema.md` under "Reference docs" (look for `positioning_doc_id`). Use `read_file_content` to fetch it. The doc grounds all content in Reope's positioning:
 
 **Positioning summary (for quick reference):**
 - **What Reope does:** Custom BIM software development — the customization layer for design software
@@ -56,14 +56,14 @@ Wait for Joachim's answer. Use 7 days as default.
 This is the primary source. Your colleagues share real technical insights, opinions, and discoveries here.
 
 ### 2a. Discover channels
-Use `slack_list_channels` to find all channels. Focus on:
+Use `slack_search_channels` to find relevant channels. Focus on:
 - Technical channels (dev, engineering, tools, bim, revit, rhino, grasshopper, dynamo, etc.)
 - Product channels (toolbox, product, features, etc.)
 - Project channels (client project discussions)
 - General channels where technical discussion happens
 
 ### 2b. Pull recent history
-For each relevant channel, use `slack_get_channel_history` to get messages from the time window.
+For each relevant channel, use `slack_read_channel` to get messages from the time window. For threads use `slack_read_thread`. Use `slack_search_public` if you want to find discussions across all channels by keyword.
 
 ### 2c. Identify insight-rich threads
 Look for messages and threads that contain:
@@ -76,10 +76,10 @@ Look for messages and threads that contain:
 - **Workflow innovations** — "New approach to..." / "Here's how we solved..."
 - **Industry observations** — "Noticed that..." / "The trend towards..."
 
-For promising threads, use `slack_get_thread_replies` to get the full conversation.
+For promising threads, use `slack_read_thread` to get the full conversation.
 
 ### 2d. Identify who said what
-Use `slack_get_user_profile` to get names for user IDs. Track which team members contributed which insights — this matters for attribution and voice.
+Use `slack_read_user_profile` (or `slack_search_users`) to get names for user IDs. Track which team members contributed which insights — this matters for attribution and voice.
 
 ### 2e. Extract raw insights
 For each valuable thread/message, capture:
@@ -114,7 +114,7 @@ Extract insights the same way as Slack — core point, who wrote it, context, ev
 Look for transcripts and notes from **internal meetings** (not client meetings):
 
 ### 4a. Find internal meetings
-Use `gcal_list_events` for the time window. Filter for meetings where ALL attendees are `@reope.com`.
+Use `list_events` for the time window. Filter for meetings where ALL attendees are `@reope.com`.
 Focus on meetings that sound like they'd have technical content:
 - Team syncs, standups, retrospectives
 - Technical discussions, architecture reviews
@@ -123,12 +123,12 @@ Focus on meetings that sound like they'd have technical content:
 
 ### 4b. Find transcripts
 For each promising internal meeting:
-- Check the calendar event for attachments using `gcal_get_event`
-- Search Gmail for `"transcript"` + meeting title or attendee names
-- Search Google Drive for transcripts: `google_drive_search` with meeting title + "transcript" or "notes"
+- Check the calendar event for attachments using `get_event`
+- Search Gmail using `search_threads` for `"transcript"` + meeting title or attendee names
+- Search Google Drive for transcripts: `search_files` with meeting title + "transcript" or "notes"
 
 ### 4c. Extract insights from transcripts
-If transcripts are found, use `google_drive_fetch` to read them. Look for:
+If transcripts are found, use `read_file_content` to read them. Look for:
 - Strong opinions expressed by team members
 - Technical approaches explained
 - Lessons learned from projects

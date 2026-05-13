@@ -15,7 +15,12 @@ $ARGUMENTS
 
 ## STEP 0: GATHER CONTEXT
 
-Before running the board, read the pre-digested markdown context files from https://drive.google.com/drive/folders/1fhy61vWFJDWxJR4ZI2qJoK03maoFcSQt?usp=drive_link if this fails use `~/.claude/Board context/` (on Windows this resolves to `C:\Users\JoachimViktil\.claude\Board context\`). These are plain-text markdown files that can be read instantly.
+Before running the board, read the pre-digested markdown context files. They live in two places:
+
+- **Primary (offline / fast):** `~/.claude/Board context/` (on Windows this resolves to `C:\Users\JoachimViktil\.claude\Board context\`)
+- **Backup (online):** https://drive.google.com/drive/folders/1fhy61vWFJDWxJR4ZI2qJoK03maoFcSQt?usp=drive_link — use the Google Drive MCP (`search_files`, `read_file_content`) if the local folder is missing.
+
+Try the local folder first; fall back to Drive only if local read fails. These are plain-text markdown files that can be read instantly.
 
 **Read in this order:**
 1. `00-REOPE-CONTEXT-START-HERE.md` — Index + company snapshot (ALWAYS read this first)

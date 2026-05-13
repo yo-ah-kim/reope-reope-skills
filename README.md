@@ -11,6 +11,7 @@ Source of truth for Reope's Claude skills. One directory per skill, each with a 
 - `gtd/` — Friday GTD weekly review (`/gtd`)
 - `content/` — Blog post drafts from internal team conversations (`/content`)
 - `contact-cleanup/` — Score and demote off-ICP HubSpot marketing contacts (`/contact-cleanup`)
+- `proposal/` — Customized engagement-model slide for a specific prospect (`/proposal <company>`)
 
 ## What does NOT live here
 
@@ -30,8 +31,8 @@ These files are pre-digested from Drive sources so the board command runs instan
 
 ### `~/.claude/Agent context/` (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`)
 
-- `guardrails.md` — Safety rules every CRM-writing skill reads first
-- `crm-schema.md` — HubSpot pipeline stages, IDs, deal properties, stage-specific talking points
+- `guardrails.md` — Safety rules every CRM-writing skill reads first (banned words, "never send, only draft", language-matching rule, Joachim's `hubspot_owner_id`)
+- `crm-schema.md` — HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage-specific talking points. **Ground truth — skills read pipeline IDs from here, not from inline copies.**
 
 ### `~/Assistant/` (output, not input)
 
@@ -56,7 +57,7 @@ ln -s ~/code/reope-skills ~/.claude/skills
 ```powershell
 # Windows, symlink each skill
 git clone git@github.com:yo-ah-kim/reope-reope-skills.git C:\code\reope-skills
-foreach ($skill in @('board','meeting-prep','new-deal','deal-triage','gtd','content','contact-cleanup')) {
+foreach ($skill in @('board','meeting-prep','new-deal','deal-triage','gtd','content','contact-cleanup','proposal')) {
   New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\skills\$skill" -Target "C:\code\reope-skills\$skill"
 }
 ```

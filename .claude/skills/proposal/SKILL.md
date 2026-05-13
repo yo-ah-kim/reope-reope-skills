@@ -13,10 +13,10 @@ You MUST use these MCP tools for all data access. NEVER use web browsing for int
 
 - **Slack:** `slack_search_public`, `slack_search_users`, `slack_read_channel`, `slack_read_thread`
 - **Notion:** `notion-search`, `notion-fetch`
-- **Gmail:** `gmail_search_messages`, `gmail_read_message`, `gmail_read_thread`
-- **Google Calendar:** `gcal_list_events`, `gcal_get_event`
-- **Google Drive:** `google_drive_search`, `google_drive_fetch` — for case studies and reference material
-- **HubSpot:** `search_crm_objects`, `hubspot-list-associations` — to anchor against existing deal context if one exists
+- **Gmail:** `search_threads`, `get_thread`
+- **Google Calendar:** `list_events`, `get_event`
+- **Google Drive:** `search_files`, `read_file_content` — for case studies and reference material
+- **HubSpot:** `search_crm_objects`, `get_crm_objects`, `manage_crm_objects` — to anchor against existing deal context if one exists
 - **Web Search:** `WebSearch` — only for prospect company news and industry context
 
 If any tool fails, report the error — do not fall back to other approaches.
@@ -24,8 +24,8 @@ If any tool fails, report the error — do not fall back to other approaches.
 ## STEP 0: READ CONTEXT
 
 Read these files:
-1. `~/.claude/Agent context/guardrails.md` — Safety rules
-2. `~/.claude/Agent context/crm-schema.md` — For HubSpot deal context if relevant
+1. `~/.claude/Agent context/guardrails.md` — Safety rules, banned-words list, voice/tone rules, language-matching rule
+2. `~/.claude/Agent context/crm-schema.md` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
 
 ## INPUT
 
@@ -61,11 +61,11 @@ If no deal exists, that's fine — note it for the wrap-up.
 
 ### 1b. Gmail thread mining
 
-Search Gmail using `gmail_search_messages`:
+Search Gmail using `search_threads`:
 - Query 1: Company name in last 90 days
 - Query 2: Domain (e.g. `from:multiconsult.no` or `to:multiconsult.no`) in last 90 days
 
-Read the 3-5 most relevant threads. Extract:
+Read the 3-5 most relevant threads with `get_thread`. Extract:
 - What scope/projects were discussed
 - Who at the prospect is involved (names, roles)
 - Any pain points they articulated
@@ -77,12 +77,12 @@ Do NOT reproduce email content — synthesize.
 
 ### 1c. Calendar history
 
-Use `gcal_list_events` with `q` set to the company name, looking back 90 days. For each meeting found:
+Use `list_events` with a query set to the company name, looking back 90 days. For each meeting found:
 - Date and attendees
-- Whether attachments or meeting links suggest a transcript exists
-- Search Gmail for `"transcript" + company name` to find any transcripts
+- Whether attachments or meeting links suggest a transcript exists (use `get_event`)
+- Search Gmail with `search_threads` for `"transcript" + company name` to find any transcripts
 
-If a transcript is found, fetch it via `google_drive_search` + `google_drive_fetch` and extract: scope discussed, decisions made, action items, technical detail.
+If a transcript is found, fetch it via `search_files` + `read_file_content` and extract: scope discussed, decisions made, action items, technical detail.
 
 ### 1d. Slack mining
 
@@ -359,7 +359,8 @@ For option 4, only update HubSpot if a deal exists. Show the proposed descriptio
 ### Voice
 - Ambition lines are written in the customer's voice ("I want..."). Use language that matches how they actually talk in emails or meetings, not generic AEC speak.
 - Scope and outcome lines are written in Reope's voice — direct, concrete, no marketing fluff.
-- Never use the banned words list (delve, leverage, comprehensive, robust, etc.) — they're flagged in `~/.claude/Agent context/guardrails.md`.
+- Apply the banned-words list and voice rules from `guardrails.md` (delve, leverage, comprehensive, robust, etc. are out).
+- Apply the language-matching rule from `guardrails.md` (Norwegian/Nordic prospect = Norwegian content okay; UK/US/international = English).
 
 ### Confidentiality
 - Never quote internal Slack messages verbatim — synthesize.

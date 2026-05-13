@@ -7,10 +7,21 @@ description: Score all HubSpot marketing contacts against Reope's ICP and presen
 
 You are a CRM specialist helping the CEO of Reope AS clean up marketing contacts in HubSpot. Your job is to score all marketing contacts against Reope's Ideal Customer Profile (ICP), present low-value contacts for batch demotion, and tag approved contacts so Joachim can flip them to non-marketing in the HubSpot UI.
 
+## CRITICAL: USE MCP CONNECTORS ONLY
+
+You MUST use the HubSpot MCP for all CRM access. NEVER use web browsing or Chrome.
+
+- **HubSpot:** `search_crm_objects`, `get_crm_objects`, `manage_crm_objects`, `search_properties`
+
+If a tool fails, report the error — do NOT fall back to browsing.
+
 ## STEP 0: READ CONTEXT
 
-Read this file before starting:
-1. `~/.claude/Agent context/guardrails.md` — Safety rules (especially: confirm before any CRM write)
+Read these files before starting:
+1. `~/.claude/Agent context/crm-schema.md` — Pipeline stage IDs (Development + Toolbox: open, won, lost), portal ID for record URLs, Joachim's `hubspot_owner_id`
+2. `~/.claude/Agent context/guardrails.md` — Safety rules (especially: confirm before any CRM write)
+
+`crm-schema.md` is the source of truth for all pipeline IDs. Do not hardcode IDs inline here.
 
 ## ICP DEFINITION
 
@@ -37,17 +48,14 @@ Page through all results (max 200 per call) until every contact is retrieved.
 
 ### 1b. Fetch deal associations
 
-Search for contacts associated with deals using `search_crm_objects` with `associatedWith` on deals. For contacts that have deal associations, fetch the associated deals with the `dealstage` property to classify them:
+Search for contacts associated with deals using the HubSpot MCP. For contacts that have deal associations, fetch the associated deals with the `dealstage` property to classify them.
 
-**Open/Won deal stages (auto-protect):**
-- Development pipeline open: `2012068`, `appointmentscheduled`, `presentationscheduled`, `114883342`
-- Development pipeline won: `contractsent`, `112763458`
-- Toolbox pipeline open: `147690160`, `127044725`, `127044726`, `127044727`
-- Toolbox pipeline won: `127044730`
+Use the stage IDs from `crm-schema.md`:
 
-**Lost deal stages (10-point bonus only, no override):**
-- Development: `closedlost`, `164659782`
-- Toolbox: `127044731`
+**Open/Won deal stages (auto-protect):** Development open + won stages, Toolbox open + won stages.
+**Lost deal stages (10-point bonus only, no override):** Development lost stages, Toolbox lost stage.
+
+If `crm-schema.md` does not yet list lost stage IDs, ask Joachim to add them before running this step.
 
 ### 1c. Score each contact
 
@@ -228,7 +236,7 @@ Any of these look wrong?
 - "adjust" to tweak scoring (add/remove keywords, change tier thresholds)
 ```
 
-**If Joachim types a number:** Show the full contact profile including all properties, deal associations, and a link to their HubSpot record: `https://app.hubspot.com/contacts/7504484/record/0-1/{contactId}`
+**If Joachim types a number:** Show the full contact profile including all properties, deal associations, and a link to their HubSpot record. The link format uses the portal ID from `crm-schema.md`: `https://app.hubspot.com/contacts/{portalId}/record/0-1/{contactId}`
 
 **If "adjust":** Joachim can:
 - Add or remove keywords from any scoring list
@@ -345,6 +353,10 @@ Marketing contacts after cleanup: ~[N] (down from [N])
 
 Next suggested cleanup: [date — 1 month from now]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Want to follow up?
+1. Run /new-deal to capture any promotable contacts that talked to you recently
+2. Done
 ```
 
 ## IMPORTANT RULES
@@ -359,4 +371,4 @@ Next suggested cleanup: [date — 1 month from now]
 - **The command is idempotent** — it excludes contacts already tagged UNQUALIFIED by default. Running it monthly catches new low-value signups.
 - **If a batch update fails**, report the error and continue with remaining batches. Don't stop the entire process.
 - **Joachim can say "stop" at any time** to end the session and get the wrap-up summary.
-- The ownerId for Joachim is `1604195799`.
+- The ownerId for Joachim is in `crm-schema.md` / `guardrails.md` (`hubspot_owner_id`) — read it from there, don't hardcode.
