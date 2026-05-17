@@ -27,8 +27,8 @@ If a tool fails, report the error — do NOT fall back to web browsing.
 ## STEP 0: READ CONTEXT
 
 Fetch these from Google Drive using `read_file_content`:
-1. `crm-schema.md` — Drive ID `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` — Pipeline stages and their meanings, stage-specific talking points, portal ID for HubSpot record links, Joachim's `hubspot_owner_id`
-2. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules (especially: never send email, only draft; match language to contact)
+1. `crm-schema.md` — Drive ID `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` — Pipeline stages and their meanings, stage-specific talking points, portal ID for HubSpot record links, Joachim's `hubspot_owner_id`
+2. `guardrails.md` — Drive ID `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` — Safety rules (especially: never send email, only draft; match language to contact)
 
 ## STEP 1: IDENTIFY THE MEETING
 

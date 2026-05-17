@@ -23,8 +23,8 @@ If any tool fails, report the error — do NOT fall back to web browsing.
 ## STEP 0: READ CONTEXT
 
 Fetch these from Google Drive using `read_file_content`:
-1. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules and voice rules (banned words list, "match language to audience", etc.)
-2. `crm-schema.md` — Drive ID `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` — Reference docs section lists the positioning doc's Drive ID
+1. `guardrails.md` — Drive ID `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` — Safety rules (AI drafts/human sends, draft-language matching, tone). Banned words and detailed voice rules are NOT here — they live in Joachim's account-level Claude preferences; apply those automatically.
+2. `crm-schema.md` — Drive ID `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` — Reference docs section lists the positioning doc's Drive ID
 
 Then read the Reope positioning document — look up its Drive ID in `crm-schema.md` under "Reference docs" and fetch it with `read_file_content`. The doc grounds all content in Reope's positioning:
 

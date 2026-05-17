@@ -22,8 +22,8 @@ If a tool fails, report the error — do NOT fall back to browsing.
 ## STEP 0: READ CONTEXT
 
 Fetch these from Google Drive using `read_file_content`:
-1. `crm-schema.md` — Drive ID `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` — Pipeline stage IDs (Development + Toolbox: open, won, lost), stale definition, deal property names, portal ID, Joachim's `hubspot_owner_id`, stage talking points
-2. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules (especially: confirm before any CRM write; match language to contact; never send email, only draft)
+1. `crm-schema.md` — Drive ID `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` — Pipeline stage IDs (Development + Toolbox: open, won, lost), stale definition, deal property names, portal ID, Joachim's `hubspot_owner_id`, stage talking points
+2. `guardrails.md` — Drive ID `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` — Safety rules (especially: confirm before any CRM write; match language to contact; never send email, only draft)
 
 `crm-schema.md` is the source of truth for all pipeline IDs. Do not hardcode IDs inline here.
 

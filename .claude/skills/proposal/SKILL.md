@@ -24,8 +24,8 @@ If any tool fails, report the error — do not fall back to other approaches.
 ## STEP 0: READ CONTEXT
 
 Fetch these from Google Drive using `read_file_content`:
-1. `guardrails.md` — Drive ID `145j9a9woeUFISskCmnT4xfWFus3E2WG2` — Safety rules, banned-words list, voice/tone rules, language-matching rule
-2. `crm-schema.md` — Drive ID `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
+1. `guardrails.md` — Drive ID `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` — Safety rules (AI drafts/human sends, draft-language matching, tone, CRM-write confirmation). Banned words live in Joachim's account-level Claude preferences, not here.
+2. `crm-schema.md` — Drive ID `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` — Pipeline stage IDs, portal ID, Joachim's `hubspot_owner_id` (used if updating the deal description)
 
 ## INPUT
 
@@ -359,7 +359,7 @@ For option 4, only update HubSpot if a deal exists. Show the proposed descriptio
 ### Voice
 - Ambition lines are written in the customer's voice ("I want..."). Use language that matches how they actually talk in emails or meetings, not generic AEC speak.
 - Scope and outcome lines are written in Reope's voice — direct, concrete, no marketing fluff.
-- Apply the banned-words list and voice rules from `guardrails.md` (delve, leverage, comprehensive, robust, etc. are out).
+- Apply the banned-words list and voice rules from Joachim's account-level Claude preferences (they are not duplicated into skills or `guardrails.md`).
 - Apply the language-matching rule from `guardrails.md` (Norwegian/Nordic prospect = Norwegian content okay; UK/US/international = English).
 
 ### Confidentiality

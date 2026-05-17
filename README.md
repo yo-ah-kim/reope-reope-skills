@@ -35,8 +35,8 @@ Skills fetch these via the Google Drive MCP (`read_file_content`). The folder li
 
 | File | Drive ID | Purpose |
 |---|---|---|
-| `crm-schema.md` | `1bj9rPxHT4UWqnMmtdr43XyuXMYHa93z7L8EDAVKoCxA` | HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage talking points. **Ground truth for pipeline IDs.** |
-| `guardrails.md` | `145j9a9woeUFISskCmnT4xfWFus3E2WG2` | Safety rules every CRM/email-touching skill reads first (banned words, "never send, only draft", language-matching rule, Joachim's `hubspot_owner_id`) |
+| `crm-schema.md` | `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` | HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage talking points. **Ground truth for pipeline IDs.** |
+| `guardrails.md` | `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` | Safety rules every CRM/email-touching skill reads first (AI drafts/human sends, no silent CRM updates, draft-language matching, tone, scope limits). Banned words live in account-level Claude preferences, not here. |
 
 Update the file in Drive when an ID changes — skills will pick it up on the next run. Don't duplicate the IDs into individual SKILL.md files.
 
