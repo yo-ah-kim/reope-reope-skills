@@ -331,7 +331,7 @@ What next?
 5. Done
 ```
 
-For option 1, save the synthesis + tier suggestions as a markdown brief.
+For option 1, save the synthesis + tier suggestions as a markdown brief. Create the `~/Assistant/proposals/` directory first if it doesn't exist.
 
 For option 4, only update HubSpot if a deal exists. Show the proposed description before writing, and require confirmation.
 

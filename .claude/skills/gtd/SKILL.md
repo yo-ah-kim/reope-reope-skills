@@ -101,7 +101,7 @@ Only check open deals — use the open-stage IDs from `crm-schema.md`. Focus on 
 
 Scan Slack for relevant activity this week:
 
-1. **Find channels** using `slack_search_channels` for key channels (general, sales, product, deals, etc.)
+1. **Find channels** using `slack_search_channels` — call it once per keyword (`general`, `sales`, `product`, `deals`, etc.). It AND-matches every word in the query, so a multi-word query returns nothing; run separate single-word searches and merge the results.
 2. **Get recent history** using `slack_read_channel` for the most active/relevant channels, filtered to this week
 3. **Look for action items directed at Joachim:**
    - Messages mentioning Joachim or @-mentioning him
@@ -134,7 +134,7 @@ Use `list_events` to pull next week's calendar (next Monday through Friday).
 - Request a condensed view (summary, time, attendees count)
 - Set `timeZone` to `Europe/Oslo`
 
-Save the snapshot to `~/Assistant/gtd/snapshots/week-YYYY-WNN.md` where YYYY-WNN is NEXT week's ISO year and week number.
+Save the snapshot to `~/Assistant/gtd/snapshots/week-YYYY-WNN.md` where YYYY-WNN is NEXT week's ISO year and week number. Create the `~/Assistant/gtd/snapshots/` directory first if it doesn't exist.
 
 Format the snapshot file:
 ```markdown

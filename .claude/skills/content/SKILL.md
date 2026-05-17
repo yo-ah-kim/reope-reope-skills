@@ -57,9 +57,9 @@ Wait for Joachim's answer. Use 7 days as default.
 This is the primary source. Your colleagues share real technical insights, opinions, and discoveries here.
 
 ### 2a. Discover channels
-Use `slack_search_channels` to find relevant channels. Focus on:
-- Technical channels (dev, engineering, tools, bim, revit, rhino, grasshopper, dynamo, etc.)
-- Product channels (toolbox, product, features, etc.)
+Use `slack_search_channels` to find relevant channels. **Call it once per keyword** — `slack_search_channels` AND-matches every word in the query, so a multi-word query returns nothing. Run separate single-word searches (`bim`, `dev`, `toolbox`, `revit`, `rhino`, `grasshopper`, `dynamo`, `product`, `general`, etc.) and merge the results. Focus on:
+- Technical channels (dev, engineering, tools, bim, revit, rhino, grasshopper, dynamo)
+- Product channels (toolbox, product, features)
 - Project channels (client project discussions)
 - General channels where technical discussion happens
 
@@ -258,7 +258,7 @@ Actions:
 When Joachim approves (or after edits):
 
 ### 9a. Save the blog post
-Save to `~/Assistant/content/posts/[YYYY-MM-DD]-[slug].md` with frontmatter:
+Save to `~/Assistant/content/posts/[YYYY-MM-DD]-[slug].md` with frontmatter. Create the `~/Assistant/content/posts/` directory first if it doesn't exist.
 
 ```markdown
 ---

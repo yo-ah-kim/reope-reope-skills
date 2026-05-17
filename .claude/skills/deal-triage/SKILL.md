@@ -32,7 +32,9 @@ Fetch these from Google Drive using `read_file_content`:
 Pull all open deals from both pipelines. A deal is "open" if it is NOT in a won or lost stage. The exact stage IDs for each pipeline (open, won, lost) are in `crm-schema.md` — use them from there.
 
 Use `search_crm_objects` with objectType `deals`. Request these properties:
-`dealname`, `dealstage`, `pipeline`, `amount`, `closedate`, `createdate`, `hs_lastmodifieddate`, `hubspot_owner_id`, `description`, `closed_lost_reason`, `closed_won_reason`
+`dealname`, `dealstage`, `pipeline`, `amount`, `deal_currency_code`, `closedate`, `createdate`, `hs_lastmodifieddate`, `hubspot_owner_id`, `description`, `closed_lost_reason`, `closed_won_reason`
+
+Deals exist in multiple currencies (NOK and EUR seen in this account). Always request `deal_currency_code` alongside `amount`, and never sum across currencies — report each currency separately.
 
 Pull in multiple queries if needed:
 1. All open Development deals (open stages from `crm-schema.md`)
@@ -54,31 +56,35 @@ PIPELINE HEALTH DASHBOARD
 
 ── DEVELOPMENT PIPELINE ─────────────────────────────
 
-| Stage              | Deals | Value (NOK) | Avg Age | Stale |
-|--------------------|-------|-------------|---------|-------|
-| Contract sent      |   [N] |   [amount]  | [X] d   | [N]   |
-| Proposal sent      |   [N] |   [amount]  | [X] d   | [N]   |
-| Working on scope   |   [N] |   [amount]  | [X] d   | [N]   |
-| Meeting booked     |   [N] |   [amount]  | [X] d   | [N]   |
-| **Total open**     |   [N] |   [amount]  |         | [N]   |
+| Stage              | Deals | Value           | Avg Age | Stale |
+|--------------------|-------|-----------------|---------|-------|
+| Contract sent      |   [N] |   [value]       | [X] d   | [N]   |
+| Proposal sent      |   [N] |   [value]       | [X] d   | [N]   |
+| Working on scope   |   [N] |   [value]       | [X] d   | [N]   |
+| Meeting booked     |   [N] |   [value]       | [X] d   | [N]   |
+| **Total open**     |   [N] |   [value]       |         | [N]   |
 
-Won deals (upsell candidates): [N] deals ([amount] NOK)
+Won deals (upsell candidates): [N] deals ([value])
 
 ── TOOLBOX PIPELINE ─────────────────────────────────
 
-| Stage              | Deals | Value (NOK) | Avg Age | Stale |
-|--------------------|-------|-------------|---------|-------|
-| TB Offer sent      |   [N] |   [amount]  | [X] d   | [N]   |
-| Toolbox trial      |   [N] |   [amount]  | [X] d   | [N]   |
-| TB Meeting booked  |   [N] |   [amount]  | [X] d   | [N]   |
-| Tilda LEAD         |   [N] |   [amount]  | [X] d   | [N]   |
-| **Total open**     |   [N] |   [amount]  |         | [N]   |
+Use the actual Toolbox stage names from `crm-schema.md` for the rows
+(Tilda LEAD / Meeting booked / Toolbox trial / Offer sent).
+
+| Stage              | Deals | Value           | Avg Age | Stale |
+|--------------------|-------|-----------------|---------|-------|
+| [stage name]       |   [N] |   [value]       | [X] d   | [N]   |
+| ...                |   ... |   ...           | ...     | ...   |
+| **Total open**     |   [N] |   [value]       |         | [N]   |
 
 ── OVERALL HEALTH ───────────────────────────────────
 
-Total pipeline value: [amount] NOK across [N] open deals
-Stale deals: [N] ([Z]% of pipeline) — [amount] NOK at risk
+Total pipeline value: [value] across [N] open deals
+Stale deals: [N] ([Z]% of pipeline) — [value] at risk
 Pipeline velocity: [N] deals closed (won+lost) in last 30 days
+
+**`[value]` format:** report each currency separately, e.g.
+`1.74M NOK + 28.4k EUR`. Never sum across currencies.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -214,14 +220,17 @@ Toolbox deals are typically small (2,500-10,000 NOK) and many are auto-created f
 Phase 5 — Toolbox Batch Review ([N] stale deals)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-|  #  | Deal Name             | Stage          | Value   | Last Activity | Close Date    |
-|-----|-----------------------|----------------|---------|---------------|---------------|
-|  1  | [name]                | Tilda LEAD     | 5,000   | 120 days ago  | 2025-08-15    |
-|  2  | [name]                | TB Offer sent  | 7,500   | 45 days ago   | 2025-11-01    |
-|  3  | [name]                | Toolbox trial  | 2,500   | 90 days ago   | —             |
-|  4  | [name]                | Tilda LEAD     | 0       | 200 days ago  | —             |
-|  5  | [name]                | TB Meeting     | 10,000  | 30 days ago   | 2025-12-15    |
-| ... | ...                   | ...            | ...     | ...           | ...           |
+Stage names are the Toolbox stages from `crm-schema.md`
+(Tilda LEAD / Meeting booked / Toolbox trial / Offer sent).
+
+|  #  | Deal Name             | Stage          | Value      | Last Activity | Close Date    |
+|-----|-----------------------|----------------|------------|---------------|---------------|
+|  1  | [name]                | Tilda LEAD     | 5,000 NOK  | 120 days ago  | 2025-08-15    |
+|  2  | [name]                | Offer sent     | 7,500 NOK  | 45 days ago   | 2025-11-01    |
+|  3  | [name]                | Toolbox trial  | 2,500 NOK  | 90 days ago   | —             |
+|  4  | [name]                | Tilda LEAD     | 0          | 200 days ago  | —             |
+|  5  | [name]                | Meeting booked | 10,000 NOK | 30 days ago   | 2025-12-15    |
+| ... | ...                   | ...            | ...        | ...           | ...           |
 
 Quick actions (you can combine):
 - "close all" — close all as lost
