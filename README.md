@@ -11,6 +11,7 @@ Source of truth for Reope's Claude skills. One directory per skill, each with a 
 - `gtd/` — Friday GTD weekly review (`/gtd`)
 - `content/` — Blog post drafts from internal team conversations (`/content`)
 - `contact-cleanup/` — Score and demote off-ICP HubSpot marketing contacts (`/contact-cleanup`)
+- `proposal/` — Customized engagement-model slide for a specific prospect (`/proposal <company>`)
 
 ## What does NOT live here
 
@@ -28,10 +29,16 @@ Sensitive context (financials, team CVs, client revenue, time stats, CRM schema)
 
 These files are pre-digested from Drive sources so the board command runs instantly. Re-digest quarterly or after major strategic updates.
 
-### `~/.claude/Agent context/` (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`)
+### Google Drive — `Agent context/` folder (used by `/gtd`, `/meeting-prep`, `/new-deal`, `/deal-triage`, `/contact-cleanup`, `/content`, `/proposal`)
 
-- `guardrails.md` — Safety rules every CRM-writing skill reads first
-- `crm-schema.md` — HubSpot pipeline stages, IDs, deal properties, stage-specific talking points
+Skills fetch these via the Google Drive MCP (`read_file_content`). The folder lives at the root of Joachim's My Drive: https://drive.google.com/drive/folders/105hQapsv9cbi4JqsfwHIDmJGKIzkc27J
+
+| File | Drive ID | Purpose |
+|---|---|---|
+| `crm-schema.md` | `1EluEMDP0u4Z0ZHywYGcGaqR1nIOA_FhK` | HubSpot portal ID, pipeline stage IDs (Development + Toolbox: open, won, lost), deal properties, stage talking points. **Ground truth for pipeline IDs.** |
+| `guardrails.md` | `1aXV4OiIa9Q8olQBhYoFl8Dxap_aiiSTD` | Safety rules every CRM/email-touching skill reads first (AI drafts/human sends, no silent CRM updates, draft-language matching, tone, scope limits). Banned words live in account-level Claude preferences, not here. |
+
+Update the file in Drive when an ID changes — skills will pick it up on the next run. Don't duplicate the IDs into individual SKILL.md files.
 
 ### `~/Assistant/` (output, not input)
 
@@ -56,7 +63,7 @@ ln -s ~/code/reope-skills ~/.claude/skills
 ```powershell
 # Windows, symlink each skill
 git clone git@github.com:yo-ah-kim/reope-reope-skills.git C:\code\reope-skills
-foreach ($skill in @('board','meeting-prep','new-deal','deal-triage','gtd','content','contact-cleanup')) {
+foreach ($skill in @('board','meeting-prep','new-deal','deal-triage','gtd','content','contact-cleanup','proposal')) {
   New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\skills\$skill" -Target "C:\code\reope-skills\$skill"
 }
 ```
