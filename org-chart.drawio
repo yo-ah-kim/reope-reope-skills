@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2026-05-20T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="reope-org-chart" name="Reope Org Chart">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ceo" value="&lt;b&gt;Joachim Viktil&lt;/b&gt;&lt;br&gt;CEO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="60" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="coo" value="&lt;b&gt;Pelle Haukaas&lt;/b&gt;&lt;br&gt;COO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="380" y="240" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="architects" value="&lt;b&gt;10 Architects Who Code&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="240" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="camilla" value="&lt;b&gt;Camilla&lt;/b&gt;&lt;br&gt;Accountant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ruben" value="&lt;b&gt;Ruben&lt;/b&gt;&lt;br&gt;Website Developer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="400" y="460" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="oyvind" value="&lt;b&gt;Øyvind&lt;/b&gt;&lt;br&gt;Financial Advisor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="460" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="claude-marketing" value="&lt;b&gt;Claude AI&lt;/b&gt;&lt;br&gt;Marketing Content Writer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="460" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="claude-sales" value="&lt;b&gt;Claude AI&lt;/b&gt;&lt;br&gt;Sales Support" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;verticalAlign=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="460" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#6c8ebf;" edge="1" parent="1" source="ceo" target="coo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#6c8ebf;" edge="1" parent="1" source="ceo" target="architects">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#d79b00;" edge="1" parent="1" source="ceo" target="camilla">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#d79b00;" edge="1" parent="1" source="ceo" target="ruben">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#d79b00;" edge="1" parent="1" source="ceo" target="oyvind">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#d79b00;" edge="1" parent="1" source="ceo" target="claude-marketing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeColor=#d79b00;" edge="1" parent="1" source="ceo" target="claude-sales">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
