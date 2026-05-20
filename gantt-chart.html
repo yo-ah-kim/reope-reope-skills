@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>EssilorLuxottica Programme — Indicative Gantt (Jun 2026 – Sep 2027)</title>
+<title>EssilorLuxottica Programme — Indicative Gantt (Jun 2026 – Jun 2027)</title>
 <style>
   :root {
     --bg: #f6f2e8;
@@ -12,12 +12,11 @@
     --grid-strong: #c9bf9f;
     --row-alt: #efe9d8;
     --keystone: #ad6f17;
-    --keystone-soft: #d9a955;
     --keystone-deep: #7a4d0e;
     --s1: #1f4b8e;
+    --s2: #4a6b1f;
     --s3: #2e6b6e;
     --rollout: #6e3a87;
-    --ops: #2a2a2a;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -56,7 +55,7 @@
   .year-label { font-size: 12px; fill: var(--ink); font-weight: 600; }
   .quarter-label { font-size: 10px; fill: var(--muted); }
   .bar-label { font-size: 11px; fill: #fff; font-weight: 500; }
-  .bar-label-dark { font-size: 11px; fill: var(--ink); font-weight: 500; }
+  .bar-label-small { font-size: 10px; fill: #fff; font-weight: 500; }
   .milestone-label { font-size: 10.5px; fill: var(--ink); }
   .milestone-sub { font-size: 10px; fill: var(--muted); }
   .footer-note {
@@ -69,51 +68,48 @@
   <header>
     <h1>EssilorLuxottica Programme — Indicative Gantt</h1>
     <div class="sub">
-      Indicative timeline assuming mid-June 2026 kick-off. Dates to be confirmed at kick-off subject to
+      Indicative timeline assuming June 2026 kick-off. Dates to be confirmed at kick-off subject to
       stakeholder availability, input readiness and parallel EL milestones.
     </div>
   </header>
 
   <div class="legend">
-    <div class="item"><span class="swatch" style="background:var(--keystone)"></span>Phase 0 / Pilot</div>
-    <div class="item"><span class="swatch" style="background:var(--s1)"></span>Stream 1 — BIM Framework</div>
+    <div class="item"><span class="swatch" style="background:var(--keystone)"></span>Phase 0</div>
+    <div class="item"><span class="swatch" style="background:var(--s1)"></span>Stream 1 — Templates &amp; Guidelines</div>
+    <div class="item"><span class="swatch" style="background:var(--s2)"></span>Stream 2 — Pilot 10</div>
     <div class="item"><span class="swatch" style="background:var(--s3)"></span>Stream 3 — CD Automation</div>
-    <div class="item"><span class="swatch" style="background:var(--rollout)"></span>Roll-out (30 / 70 projects)</div>
-    <div class="item"><span class="swatch" style="background:var(--ops)"></span>Operations</div>
+    <div class="item"><span class="swatch" style="background:var(--rollout)"></span>Roll-out (30 projects)</div>
     <div class="item"><span class="swatch milestone"></span>Milestone</div>
   </div>
 
   <div class="chart">
     <!--
       Coordinate system:
-        Label column: x 0..340
-        Timeline:     x 340..1460 (1120px) over 16 months (Jun 2026 – Sep 2027)
-        monthW = 70 px;  x(idx) = 340 + idx * 70
+        Label column:  x 0..340
+        Timeline:      x 340..1445 (1105px) over 13 months (Jun 2026 – Jun 2027)
+        monthW = 85;   x(idx) = 340 + idx * 85
       Idx mapping:
         Jun 26=0, Jul=1, Aug=2, Sep=3, Oct=4, Nov=5, Dec=6,
-        Jan 27=7, Feb=8, Mar=9, Apr=10, May=11, Jun=12, Jul=13, Aug=14, Sep=15
-      Row layout (header 62, then 36px rows):
-        62  group: Phase 0 / Pilot
+        Jan 27=7, Feb=8, Mar=9, Apr=10, May=11, Jun=12 (right edge = idx 13)
+      Row layout (header 62, then 36px rows, 12 rows = bars end y=494):
+        62  group: Phase 0
         98  Phase 0 — 40-project portfolio analysis
-        134 Pilot 10
-        170 group: Stream 1
-        206 BIM Libraries & Schedules scaffolding
-        242 Stream 1 Framework v0 → v1
-        278 Methodology handover
-        314 group: Stream 3
-        350 Stream 3 toolkit on test projects
-        386 CDs Automation pilot deployment
-        422 Stream 3 CD automation roll-out (70 projects)
-        458 group: Roll-out / Operations
-        494 Iteration from pilots
-        530 EL internal teams convert 30 remaining projects
-        566 Operations phase
-        Bars end y=602. Milestone band 612..720.
+        134 group: Stream 1
+        170 Stream 1 (drafting → review → revision)
+        206 group: Stream 2
+        242 Pilot 10 (pilot → review)
+        278 group: Stream 3
+        314 Stream 3 toolkit kick-off & development
+        350 Stream 3 testing & iteration
+        386 Stream 3 roll-out across 70 projects
+        422 group: Roll-out
+        458 EL teams convert 30 remaining projects
+        Milestone band 504..620.
     -->
-    <svg viewBox="0 0 1460 720" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Programme Gantt chart">
+    <svg viewBox="0 0 1460 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Programme Gantt chart">
       <defs>
-        <pattern id="dashHandover" patternUnits="userSpaceOnUse" width="8" height="8">
-          <rect width="8" height="8" fill="#1f4b8e"/>
+        <pattern id="s3TestHatch" patternUnits="userSpaceOnUse" width="8" height="8">
+          <rect width="8" height="8" fill="#2e6b6e"/>
           <path d="M0,8 L8,0" stroke="#ffffff" stroke-width="1.2" opacity="0.55"/>
         </pattern>
       </defs>
@@ -123,67 +119,57 @@
       <line x1="0" y1="62" x2="1460" y2="62" stroke="var(--grid-strong)"/>
 
       <!-- Year labels -->
-      <!-- 2026: center of Jun–Dec span → idx 3.5 → x=585 -->
-      <text x="585" y="22" class="year-label" text-anchor="middle">2026</text>
-      <!-- 2027: center of Jan–Sep span → idx 11.0 → x=1110 (adjusted to 1145 for visual center) -->
-      <text x="1145" y="22" class="year-label" text-anchor="middle">2027</text>
+      <text x="637.5"  y="22" class="year-label" text-anchor="middle">2026</text>
+      <text x="1147.5" y="22" class="year-label" text-anchor="middle">2027</text>
 
       <!-- Quarter labels -->
-      <text x="515"  y="22" class="quarter-label" text-anchor="middle">Q3</text>
-      <text x="725"  y="22" class="quarter-label" text-anchor="middle">Q4</text>
-      <text x="935"  y="22" class="quarter-label" text-anchor="middle">Q1</text>
-      <text x="1145" y="22" class="quarter-label" text-anchor="middle">Q2</text>
-      <text x="1355" y="22" class="quarter-label" text-anchor="middle">Q3</text>
+      <text x="552.5"  y="22" class="quarter-label" text-anchor="middle">Q3</text>
+      <text x="807.5"  y="22" class="quarter-label" text-anchor="middle">Q4</text>
+      <text x="1062.5" y="22" class="quarter-label" text-anchor="middle">Q1</text>
+      <text x="1317.5" y="22" class="quarter-label" text-anchor="middle">Q2</text>
 
       <!-- Month labels -->
       <g>
-        <text x="375"  y="50" class="month-label" text-anchor="middle">Jun</text>
-        <text x="445"  y="50" class="month-label" text-anchor="middle">Jul</text>
-        <text x="515"  y="50" class="month-label" text-anchor="middle">Aug</text>
-        <text x="585"  y="50" class="month-label" text-anchor="middle">Sep</text>
-        <text x="655"  y="50" class="month-label" text-anchor="middle">Oct</text>
-        <text x="725"  y="50" class="month-label" text-anchor="middle">Nov</text>
-        <text x="795"  y="50" class="month-label" text-anchor="middle">Dec</text>
-        <text x="865"  y="50" class="month-label" text-anchor="middle">Jan</text>
-        <text x="935"  y="50" class="month-label" text-anchor="middle">Feb</text>
-        <text x="1005" y="50" class="month-label" text-anchor="middle">Mar</text>
-        <text x="1075" y="50" class="month-label" text-anchor="middle">Apr</text>
-        <text x="1145" y="50" class="month-label" text-anchor="middle">May</text>
-        <text x="1215" y="50" class="month-label" text-anchor="middle">Jun</text>
-        <text x="1285" y="50" class="month-label" text-anchor="middle">Jul</text>
-        <text x="1355" y="50" class="month-label" text-anchor="middle">Aug</text>
-        <text x="1425" y="50" class="month-label" text-anchor="middle">Sep</text>
+        <text x="382.5"  y="50" class="month-label" text-anchor="middle">Jun</text>
+        <text x="467.5"  y="50" class="month-label" text-anchor="middle">Jul</text>
+        <text x="552.5"  y="50" class="month-label" text-anchor="middle">Aug</text>
+        <text x="637.5"  y="50" class="month-label" text-anchor="middle">Sep</text>
+        <text x="722.5"  y="50" class="month-label" text-anchor="middle">Oct</text>
+        <text x="807.5"  y="50" class="month-label" text-anchor="middle">Nov</text>
+        <text x="892.5"  y="50" class="month-label" text-anchor="middle">Dec</text>
+        <text x="977.5"  y="50" class="month-label" text-anchor="middle">Jan</text>
+        <text x="1062.5" y="50" class="month-label" text-anchor="middle">Feb</text>
+        <text x="1147.5" y="50" class="month-label" text-anchor="middle">Mar</text>
+        <text x="1232.5" y="50" class="month-label" text-anchor="middle">Apr</text>
+        <text x="1317.5" y="50" class="month-label" text-anchor="middle">May</text>
+        <text x="1402.5" y="50" class="month-label" text-anchor="middle">Jun</text>
       </g>
 
       <!-- Vertical month gridlines (between months) -->
       <g stroke="var(--grid)" stroke-width="1">
-        <line x1="410"  y1="62" x2="410"  y2="602"/>
-        <line x1="480"  y1="62" x2="480"  y2="602"/>
-        <line x1="550"  y1="62" x2="550"  y2="602"/>
-        <line x1="620"  y1="62" x2="620"  y2="602"/>
-        <line x1="690"  y1="62" x2="690"  y2="602"/>
-        <line x1="760"  y1="62" x2="760"  y2="602"/>
-        <line x1="900"  y1="62" x2="900"  y2="602"/>
-        <line x1="970"  y1="62" x2="970"  y2="602"/>
-        <line x1="1040" y1="62" x2="1040" y2="602"/>
-        <line x1="1110" y1="62" x2="1110" y2="602"/>
-        <line x1="1180" y1="62" x2="1180" y2="602"/>
-        <line x1="1250" y1="62" x2="1250" y2="602"/>
-        <line x1="1320" y1="62" x2="1320" y2="602"/>
-        <line x1="1390" y1="62" x2="1390" y2="602"/>
+        <line x1="510"  y1="62" x2="510"  y2="494"/>
+        <line x1="595"  y1="62" x2="595"  y2="494"/>
+        <line x1="765"  y1="62" x2="765"  y2="494"/>
+        <line x1="850"  y1="62" x2="850"  y2="494"/>
+        <line x1="1020" y1="62" x2="1020" y2="494"/>
+        <line x1="1105" y1="62" x2="1105" y2="494"/>
+        <line x1="1275" y1="62" x2="1275" y2="494"/>
+        <line x1="1360" y1="62" x2="1360" y2="494"/>
       </g>
-      <!-- Quarter boundaries (slightly stronger) -->
+      <!-- Quarter / year boundaries (stronger) -->
       <g stroke="var(--grid-strong)" stroke-width="1">
-        <line x1="550"  y1="62" x2="550"  y2="602"/>
-        <line x1="760"  y1="62" x2="760"  y2="602"/>
-        <line x1="970"  y1="62" x2="970"  y2="602"/>
-        <line x1="1180" y1="62" x2="1180" y2="602"/>
+        <line x1="425"  y1="62" x2="425"  y2="494"/> <!-- Jul -->
+        <line x1="680"  y1="62" x2="680"  y2="494"/> <!-- Oct -->
+        <line x1="1190" y1="62" x2="1190" y2="494"/> <!-- Apr -->
       </g>
-      <!-- Year boundary (Jan 2027) and label column edge -->
-      <line x1="830" y1="0" x2="830" y2="720" stroke="var(--grid-strong)" stroke-width="1.5"/>
-      <line x1="340" y1="0" x2="340" y2="720" stroke="var(--grid-strong)" stroke-width="1.5"/>
+      <!-- Year boundary (Jan 2027) -->
+      <line x1="935" y1="0" x2="935" y2="620" stroke="var(--grid-strong)" stroke-width="1.5"/>
+      <!-- Label column edge -->
+      <line x1="340" y1="0" x2="340" y2="620" stroke="var(--grid-strong)" stroke-width="1.5"/>
+      <!-- Right edge of timeline -->
+      <line x1="1445" y1="62" x2="1445" y2="494" stroke="var(--grid)" stroke-width="1"/>
 
-      <!-- Row backgrounds (alternating, 15 rows) -->
+      <!-- Row backgrounds (alternating, 12 rows) -->
       <g>
         <rect x="0" y="62"  width="1460" height="36" fill="#fffdf6"/>
         <rect x="0" y="98"  width="1460" height="36" fill="var(--row-alt)"/>
@@ -197,139 +183,124 @@
         <rect x="0" y="386" width="1460" height="36" fill="var(--row-alt)"/>
         <rect x="0" y="422" width="1460" height="36" fill="#fffdf6"/>
         <rect x="0" y="458" width="1460" height="36" fill="var(--row-alt)"/>
-        <rect x="0" y="494" width="1460" height="36" fill="#fffdf6"/>
-        <rect x="0" y="530" width="1460" height="36" fill="var(--row-alt)"/>
-        <rect x="0" y="566" width="1460" height="36" fill="#fffdf6"/>
       </g>
 
-      <!-- Row labels (group headers in keystone) -->
+      <!-- Row labels -->
       <g>
-        <text x="20" y="85"  class="row-group">Phase 0 / Pilot</text>
+        <text x="20" y="85"  class="row-group">Phase 0</text>
         <text x="20" y="121" class="row-label">Phase 0 — 40-project portfolio analysis</text>
-        <text x="20" y="157" class="row-label">Pilot 10 — first 10 project conversions</text>
 
-        <text x="20" y="193" class="row-group">Stream 1 — BIM Framework</text>
-        <text x="20" y="229" class="row-label">BIM Libraries &amp; Schedules scaffolding</text>
-        <text x="20" y="265" class="row-label">Stream 1 Framework v0 → v1 (locked Nov)</text>
-        <text x="20" y="301" class="row-label">Methodology handover to EL modellers</text>
+        <text x="20" y="157" class="row-group">Stream 1 — Templates &amp; Guidelines</text>
+        <text x="20" y="193" class="row-label">Drafting → EL review → Revision</text>
 
-        <text x="20" y="337" class="row-group">Stream 3 — CD Automation</text>
-        <text x="20" y="373" class="row-label">Stream 3 toolkit on test projects</text>
-        <text x="20" y="409" class="row-label">CDs Automation pilot deployment</text>
-        <text x="20" y="445" class="row-label">Stream 3 CD automation roll-out (70 projects)</text>
+        <text x="20" y="229" class="row-group">Stream 2 — Pilot 10</text>
+        <text x="20" y="265" class="row-label">Pilot 10 conversions → EL review</text>
 
-        <text x="20" y="481" class="row-group">Roll-out / Operations</text>
-        <text x="20" y="517" class="row-label">Iteration from pilots</text>
-        <text x="20" y="553" class="row-label">EL teams convert 30 remaining projects (Reope support)</text>
-        <text x="20" y="589" class="row-label">Operations phase</text>
+        <text x="20" y="301" class="row-group">Stream 3 — CD Automation</text>
+        <text x="20" y="337" class="row-label">Toolkit kick-off &amp; development</text>
+        <text x="20" y="373" class="row-label">Testing &amp; iteration</text>
+        <text x="20" y="409" class="row-label">Roll-out across 70 projects</text>
+
+        <text x="20" y="445" class="row-group">Roll-out</text>
+        <text x="20" y="481" class="row-label">EL teams convert 30 remaining projects (Reope support)</text>
       </g>
 
       <!-- =============== BARS =============== -->
-      <!-- Bar y = row_top + 9, height = 18 -->
 
-      <!-- 1. Phase 0: idx 0.5 → 2.0 → x 375 → 480 (w=105) -->
-      <rect x="375" y="107" width="105" height="18" fill="var(--keystone)" rx="3"/>
-      <text x="383" y="120" class="bar-label">Phase 0</text>
+      <!-- Phase 0: idx 0 → 1, x 340 → 425 (w=85) -->
+      <rect x="340" y="107" width="85" height="18" fill="var(--keystone)" rx="3"/>
+      <text x="348" y="120" class="bar-label">Phase 0</text>
 
-      <!-- 2. Pilot 10: idx 2.0 → 5.0 → x 480 → 690 (w=210) -->
-      <rect x="480" y="143" width="210" height="18" fill="var(--keystone)" rx="3"/>
-      <text x="488" y="156" class="bar-label">Pilot 10 (10 conversions)</text>
+      <!-- Stream 1 — drafting (Jul-Aug): idx 1 → 3, x 425 → 595 (w=170) -->
+      <rect x="425" y="179" width="170" height="18" fill="var(--s1)" rx="3"/>
+      <text x="433" y="192" class="bar-label">Drafting templates &amp; guidelines</text>
+      <!-- Stream 1 — EL review (Sep): idx 3 → 4, x 595 → 680 (w=85), lighter -->
+      <rect x="595" y="179" width="85" height="18" fill="var(--s1)" opacity="0.55" rx="3"/>
+      <text x="603" y="192" class="bar-label-small">EL review</text>
+      <!-- Stream 1 — revision (Oct): idx 4 → 5, x 680 → 765 (w=85) -->
+      <rect x="680" y="179" width="85" height="18" fill="var(--s1)" rx="3"/>
+      <text x="688" y="192" class="bar-label-small">Revision</text>
 
-      <!-- 3. BIM Libraries & Schedules scaffolding: idx 2.0 → 3.0 → x 480 → 550 (w=70) -->
-      <rect x="480" y="215" width="70" height="18" fill="var(--s1)" rx="3"/>
-      <text x="488" y="228" class="bar-label">BIM libs</text>
+      <!-- Stream 2 — Pilot 10 (Jul-Aug): idx 1 → 3, x 425 → 595 (w=170) -->
+      <rect x="425" y="251" width="170" height="18" fill="var(--s2)" rx="3"/>
+      <text x="433" y="264" class="bar-label">Pilot 10 — 10 conversions</text>
+      <!-- Stream 2 — EL review (Sep): idx 3 → 4, x 595 → 680 (w=85), lighter -->
+      <rect x="595" y="251" width="85" height="18" fill="var(--s2)" opacity="0.55" rx="3"/>
+      <text x="603" y="264" class="bar-label-small">EL review</text>
 
-      <!-- 4. Stream 1 Framework v0 (lighter) + v1 (full) → idx 3.0 → 5.5 → x 550 → 725 -->
-      <rect x="550" y="251" width="70" height="18" fill="var(--s1)" opacity="0.55" rx="3"/>
-      <rect x="620" y="251" width="105" height="18" fill="var(--s1)" rx="3"/>
-      <text x="558" y="264" class="bar-label">v0</text>
-      <text x="628" y="264" class="bar-label">v1 → locked</text>
+      <!-- Stream 3 — toolkit kick-off & dev (Sep-Nov): idx 3 → 6, x 595 → 850 (w=255) -->
+      <rect x="595" y="323" width="255" height="18" fill="var(--s3)" rx="3"/>
+      <text x="603" y="336" class="bar-label">Kick-off &amp; toolkit development</text>
 
-      <!-- 5. Methodology handover: idx 5.0 → 13.0 → x 690 → 1250 (w=560) -->
-      <rect x="690" y="287" width="560" height="18" fill="url(#dashHandover)" rx="3"/>
-      <text x="698" y="300" class="bar-label">Methodology handover (continuous)</text>
+      <!-- Stream 3 — testing & iteration: idx 5 → 10, x 765 → 1190 (w=425) -->
+      <rect x="765" y="359" width="425" height="18" fill="url(#s3TestHatch)" rx="3"/>
+      <text x="773" y="372" class="bar-label">Testing &amp; iteration (Q1 '27)</text>
 
-      <!-- 6. Stream 3 toolkit on test projects: idx 3.0 → 5.0 → x 550 → 690 (w=140) -->
-      <rect x="550" y="359" width="140" height="18" fill="var(--s3)" rx="3"/>
-      <text x="558" y="372" class="bar-label">Toolkit on test projects</text>
+      <!-- Stream 3 — roll-out 70 projects (Q2 27): idx 10 → 13, x 1190 → 1445 (w=255) -->
+      <rect x="1190" y="395" width="255" height="18" fill="var(--s3)" rx="3"/>
+      <text x="1198" y="408" class="bar-label">Roll-out across 70 projects</text>
 
-      <!-- 7. CDs Automation pilot deployment: idx 5.0 → 6.0 → x 690 → 760 (w=70) -->
-      <rect x="690" y="395" width="70" height="18" fill="var(--s3)" rx="3"/>
-      <text x="698" y="408" class="bar-label">CDs pilot</text>
-
-      <!-- 8. Stream 3 CD automation roll-out (70 projects): Q2 2027 idx 10.0 → 13.0 → x 1040 → 1250 (w=210) -->
-      <rect x="1040" y="431" width="210" height="18" fill="var(--s3)" rx="3"/>
-      <text x="1048" y="444" class="bar-label">Roll-out across 70 projects</text>
-
-      <!-- 9. Iteration from pilots: Q1 2027 idx 7.0 → 10.0 → x 830 → 1040 (w=210) -->
-      <rect x="830" y="503" width="210" height="18" fill="var(--rollout)" rx="3"/>
-      <text x="838" y="516" class="bar-label">Iteration from pilots</text>
-
-      <!-- 10. EL teams convert 30 remaining projects: idx 5.0 → 13.0 → x 690 → 1250 (w=560) -->
-      <rect x="690" y="539" width="560" height="18" fill="var(--rollout)" rx="3"/>
-      <text x="698" y="552" class="bar-label">EL internal teams convert 30 remaining projects (with Reope support)</text>
-
-      <!-- 11. Operations phase: idx 13.0 → 16.0 → x 1250 → 1460 (w=210) -->
-      <rect x="1250" y="575" width="210" height="18" fill="var(--ops)" rx="3"/>
-      <text x="1258" y="588" class="bar-label">Operations phase →</text>
+      <!-- EL teams convert 30 remaining projects: idx 4 → 10, x 680 → 1190 (w=510) -->
+      <rect x="680" y="467" width="510" height="18" fill="var(--rollout)" rx="3"/>
+      <text x="688" y="480" class="bar-label">EL internal teams convert 30 remaining projects (Reope support)</text>
 
       <!-- =============== MILESTONES BAND =============== -->
-      <line x1="340" y1="612" x2="1460" y2="612" stroke="var(--grid-strong)" stroke-dasharray="3 3"/>
-      <text x="20" y="640" class="row-group">Milestones</text>
+      <line x1="340" y1="504" x2="1460" y2="504" stroke="var(--grid-strong)" stroke-dasharray="3 3"/>
+      <text x="20" y="528" class="row-group">Milestones</text>
 
-      <!-- Diamond helper: points "cx,cy-10 cx+10,cy cx,cy+10 cx-10,cy", stroke deep keystone -->
-
-      <!-- Kick-off: idx 0.5 → x=375 -->
+      <!-- 1. Kick-off: idx 0 → x=340 -->
       <g>
-        <polygon points="375,630 385,640 375,650 365,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="375" y="665" class="milestone-label" text-anchor="middle">Kick-off</text>
-        <text x="375" y="678" class="milestone-sub"   text-anchor="middle">mid-Jun '26</text>
+        <polygon points="340,525 350,535 340,545 330,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <text x="340" y="560" class="milestone-label" text-anchor="start">Kick-off</text>
+        <text x="340" y="573" class="milestone-sub"   text-anchor="start">Jun '26</text>
       </g>
 
-      <!-- Phase 0 done: idx 2.0 → x=480 -->
+      <!-- 2. Phase 0 done · S1+S2 start: idx 1 → x=425 -->
       <g>
-        <polygon points="480,630 490,640 480,650 470,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="480" y="665" class="milestone-label" text-anchor="middle">Phase 0 done</text>
-        <text x="480" y="678" class="milestone-sub"   text-anchor="middle">end-Jul '26</text>
+        <polygon points="425,525 435,535 425,545 415,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <text x="425" y="560" class="milestone-label" text-anchor="middle">Phase 0 done · S1+S2 start</text>
+        <text x="425" y="573" class="milestone-sub"   text-anchor="middle">end-Jun '26</text>
       </g>
 
-      <!-- EL Guidelines for BIM: idx 3.5 → x=585 -->
+      <!-- 3. S1 delivered · Pilot 10 done: idx 3 → x=595 -->
       <g>
-        <polygon points="585,630 595,640 585,650 575,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="585" y="665" class="milestone-label" text-anchor="middle">EL Guidelines for BIM</text>
-        <text x="585" y="678" class="milestone-sub"   text-anchor="middle">Sep '26</text>
+        <polygon points="595,525 605,535 595,545 585,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <text x="595" y="560" class="milestone-label" text-anchor="middle">S1 delivered · Pilot 10 done</text>
+        <text x="595" y="573" class="milestone-sub"   text-anchor="middle">end-Aug '26</text>
       </g>
 
-      <!-- Pilot 10 complete: idx 5.0 → x=690 -->
+      <!-- 4. Revised S1 deliveries: idx 5 → x=765 -->
       <g>
-        <polygon points="675,630 685,640 675,650 665,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="675" y="665" class="milestone-label" text-anchor="middle">Pilot 10 done</text>
-        <text x="675" y="678" class="milestone-sub"   text-anchor="middle">end-Oct '26</text>
+        <polygon points="765,525 775,535 765,545 755,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <text x="755" y="560" class="milestone-label" text-anchor="end">Revised S1 deliveries</text>
+        <text x="755" y="573" class="milestone-sub"   text-anchor="end">end-Oct '26</text>
       </g>
 
-      <!-- Validation + Templates locked + EL BIM DB: idx 5.5 → x=725 -->
+      <!-- 5. Validation milestone (staggered lower to avoid overlap with #4): idx 5.5 → x=807.5 -->
       <g>
-        <polygon points="740,630 750,640 740,650 730,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="740" y="665" class="milestone-label" text-anchor="middle">Validation · Templates locked · EL BIM DB</text>
-        <text x="740" y="678" class="milestone-sub"   text-anchor="middle">Nov '26</text>
+        <polygon points="807.5,525 817.5,535 807.5,545 797.5,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <line x1="807.5" y1="545" x2="807.5" y2="582" stroke="var(--keystone-deep)" stroke-width="0.8" stroke-dasharray="2 2"/>
+        <text x="815" y="590" class="milestone-label" text-anchor="start">Validation · S1+S2 complete · S3 → testing</text>
+        <text x="815" y="603" class="milestone-sub"   text-anchor="start">Nov '26</text>
       </g>
 
-      <!-- Roll-out complete / Ops begins: idx 13.0 → x=1250 -->
+      <!-- 6. Stream 3 fully operational: idx 13 → x=1445 -->
       <g>
-        <polygon points="1250,630 1260,640 1250,650 1240,640" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
-        <text x="1250" y="665" class="milestone-label" text-anchor="middle">Roll-out complete · Ops begins</text>
-        <text x="1250" y="678" class="milestone-sub"   text-anchor="middle">Q3 '27</text>
+        <polygon points="1445,525 1455,535 1445,545 1435,535" fill="var(--keystone)" stroke="var(--keystone-deep)" stroke-width="1"/>
+        <text x="1445" y="560" class="milestone-label" text-anchor="end">Stream 3 fully operational</text>
+        <text x="1445" y="573" class="milestone-sub"   text-anchor="end">end-Q2 '27</text>
       </g>
     </svg>
   </div>
 
   <p class="footer-note">
-    Notes — Phase 0 covers analysis of the 40-project portfolio. Pilot 10 runs Aug–Oct 2026 with the Stream 1 framework
-    drafted in parallel and templates locked in November after the Validation and EL BIM Database milestones.
-    Stream 3 toolkit is initiated on test projects in September 2026; the CDs Automation pilot deploys in November,
-    when EL internal teams also begin converting the 30 remaining projects with Reope support. Q1 2027 iterates from
-    pilots; Q2 2027 rolls Stream 3 CD automation across the 70 projects; Q3 2027 marks roll-out complete and the
-    start of the Operations phase.
+    Notes — Phase 0 analyses the 40-project portfolio in June. From July, Stream 1 (templates &amp; guidelines)
+    and Stream 2 (Pilot 10 conversions) run in parallel and deliver by end-August. September is an EL review
+    and feedback period and the Stream 3 kick-off. In October, Reope revises Stream 1 while EL internal
+    teams begin converting the 30 remaining projects with Reope support. November's Validation milestone
+    closes Streams 1 and 2 and hands the initial Stream 3 delivery over for testing. Q1 2027 iterates on
+    Stream 3 while rolling out Streams 1 &amp; 2 (completing the 30-project conversion); Q2 2027 rolls Stream 3
+    CD automation across the 70 projects, ending with Stream 3 fully operational at end-Q2.
   </p>
 </div>
 </body>
