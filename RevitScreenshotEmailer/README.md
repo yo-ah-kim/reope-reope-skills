@@ -9,11 +9,32 @@ Addin Setup Guide v2.
 ```
 RevitScreenshotEmailer/
 ├── RevitScreenshotEmailer.csproj   # .NET 8 class library, references Revit 2025 DLLs
-├── ScreenshotEmailCommand.cs       # IExternalCommand: screenshot + SMTP send
 ├── RevitScreenshotEmailer.addin    # Revit manifest (install to ProgramData)
 ├── EmailSettings.example.json      # SMTP config template — copy & rename
-└── .gitignore                      # excludes bin/, obj/, real EmailSettings.json
+├── ScreenshotEmailCommand.cs       # IExternalCommand: thin orchestrator
+├── Capture/
+│   ├── IViewScreenshotter.cs       # capture abstraction
+│   ├── RevitImageScreenshotter.cs  # Revit ImageExportOptions implementation
+│   └── Screenshot.cs               # value + temp-file cleanup
+└── Destinations/
+    ├── IScreenshotDestination.cs   # swap point: where the screenshot goes
+    ├── SmtpEmailDestination.cs     # current implementation: SMTP email
+    └── EmailSettings.cs            # JSON config + validation
 ```
+
+### Swapping destinations
+
+The destination is the seam. To send to Slack, Teams, a shared drive, or
+anywhere else, write a new `IScreenshotDestination`, then change one line
+in `ScreenshotEmailCommand`'s default constructor:
+
+```csharp
+public ScreenshotEmailCommand()
+    : this(new RevitImageScreenshotter(), () => new SlackDestination(...)) { }
+```
+
+The orchestrator, capture pipeline, and temp-file lifecycle don't need to
+change.
 
 ## Prerequisites
 
@@ -53,6 +74,7 @@ Output DLL lands in `bin\Debug\net8.0-windows\RevitScreenshotEmailer.dll`.
    - `username` / `password` — for Office 365 / Gmail use an **app password**,
      not your account password
    - `fromAddress` / `fromName` — the sender shown in the email
+   - `recipient` — who receives the screenshot (defaults to `joachim@reope.com`)
 
    `EmailSettings.json` is gitignored. Never commit real credentials.
 

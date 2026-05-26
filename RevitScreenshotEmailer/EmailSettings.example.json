@@ -5,5 +5,6 @@
   "username": "joachim@reope.com",
   "password": "REPLACE_WITH_APP_PASSWORD",
   "fromAddress": "joachim@reope.com",
-  "fromName": "Revit Screenshot Emailer"
+  "fromName": "Revit Screenshot Emailer",
+  "recipient": "joachim@reope.com"
 }
