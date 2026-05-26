@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>Screenshot Emailer</Name>
+    <Text>Screenshot &amp; Email</Text>
+    <Description>Captures the current Revit view and emails it to joachim@reope.com.</Description>
+    <Assembly>C:\Path\To\RevitScreenshotEmailer\bin\Debug\net8.0-windows\RevitScreenshotEmailer.dll</Assembly>
+    <AddInId>35857b3c-e07a-48fd-9530-9697309b6897</AddInId>
+    <FullClassName>RevitScreenshotEmailer.ScreenshotEmailCommand</FullClassName>
+    <VendorId>REOPE</VendorId>
+    <VendorDescription>Reope AS</VendorDescription>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+  </AddIn>
+</RevitAddIns>

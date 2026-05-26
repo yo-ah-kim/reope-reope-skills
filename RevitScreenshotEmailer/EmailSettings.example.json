@@ -1,0 +1,9 @@
+{
+  "smtpHost": "smtp.office365.com",
+  "smtpPort": 587,
+  "enableSsl": true,
+  "username": "joachim@reope.com",
+  "password": "REPLACE_WITH_APP_PASSWORD",
+  "fromAddress": "joachim@reope.com",
+  "fromName": "Revit Screenshot Emailer"
+}

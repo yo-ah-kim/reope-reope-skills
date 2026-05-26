@@ -1,0 +1,9 @@
+# Visual Studio / .NET build outputs
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Secrets — never commit real SMTP credentials
+EmailSettings.json
