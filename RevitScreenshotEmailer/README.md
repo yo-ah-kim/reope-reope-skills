@@ -70,21 +70,32 @@ Output DLL lands in `bin\Debug\net8.0-windows\RevitScreenshotEmailer.dll`.
    `C:\ProgramData\Autodesk\Revit\Addins\2025\RevitScreenshotEmailer.addin`.
 3. **Configure SMTP credentials**: copy `EmailSettings.example.json` next to
    the DLL (same folder), rename to `EmailSettings.json`, and fill in:
-   - `smtpHost` / `smtpPort` / `enableSsl` — your mail server
-   - `username` / `password` — for Gmail use an **app password**; for Office 365
-     see the note below
+   - `smtpHost` / `smtpPort` / `enableSsl` — defaults to `smtp.gmail.com:587`
+     with STARTTLS, which works for Gmail and Google Workspace
+   - `username` — your full Google Workspace address (e.g. `joachim@reope.com`)
+   - `password` — a **Google App Password**, not your account password
+     (see "Getting a Google App Password" below)
    - `fromAddress` / `fromName` — the sender shown in the email
    - `recipient` — who receives the screenshot (defaults to `joachim@reope.com`)
 
    `EmailSettings.json` is gitignored. Never commit real credentials.
 
-   > **Office 365 / Exchange Online**: Microsoft is deprecating basic SMTP
-   > authentication. SMTP AUTH may be disabled at the tenant or mailbox level
-   > (you'll see `535 5.7.139 SmtpClientAuthentication is disabled`). Either
-   > ask your admin to enable it for the sending mailbox, or use a different
-   > sending account (Gmail with app password, a personal SMTP relay, etc.).
-   > A future revision can swap `SmtpEmailDestination` for a MailKit + OAuth2
-   > or Microsoft Graph implementation behind the same interface.
+### Getting a Google App Password
+
+Google blocks plain-password SMTP for Workspace accounts. You need a 16-character
+App Password instead:
+
+1. Sign in at <https://myaccount.google.com>.
+2. Enable **2-Step Verification** if it isn't on already
+   (Security → 2-Step Verification).
+3. Open **App passwords**: <https://myaccount.google.com/apppasswords>.
+4. Name it something like "Revit Screenshot Emailer" and create.
+5. Copy the 16-character password (shown once, no spaces needed) into the
+   `password` field of `EmailSettings.json`.
+
+> **Workspace admins:** if `App passwords` isn't visible, your admin has
+> disabled it. Ask them to allow it for your account, or have them enable
+> SMTP relay and use that host instead.
 
 ## Run
 
