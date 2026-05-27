@@ -33,7 +33,6 @@ public sealed class EmailSettings
             File.ReadAllText(path),
             new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true,
                 ReadCommentHandling = JsonCommentHandling.Skip,
                 AllowTrailingCommas = true,
             });
@@ -71,8 +70,14 @@ public sealed class EmailSettings
 
     private static string ResolvePath()
     {
-        var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-                        ?? AppContext.BaseDirectory;
+        var location = typeof(EmailSettings).Assembly.Location;
+        var directory = string.IsNullOrEmpty(location) ? null : Path.GetDirectoryName(location);
+        if (string.IsNullOrEmpty(directory))
+        {
+            throw new InvalidOperationException(
+                "Could not resolve the addin folder to locate EmailSettings.json. " +
+                "Confirm the addin DLL is loaded from disk (not shadow-copied or single-file packed).");
+        }
         return Path.Combine(directory, FileName);
     }
 }

@@ -71,12 +71,20 @@ Output DLL lands in `bin\Debug\net8.0-windows\RevitScreenshotEmailer.dll`.
 3. **Configure SMTP credentials**: copy `EmailSettings.example.json` next to
    the DLL (same folder), rename to `EmailSettings.json`, and fill in:
    - `smtpHost` / `smtpPort` / `enableSsl` — your mail server
-   - `username` / `password` — for Office 365 / Gmail use an **app password**,
-     not your account password
+   - `username` / `password` — for Gmail use an **app password**; for Office 365
+     see the note below
    - `fromAddress` / `fromName` — the sender shown in the email
    - `recipient` — who receives the screenshot (defaults to `joachim@reope.com`)
 
    `EmailSettings.json` is gitignored. Never commit real credentials.
+
+   > **Office 365 / Exchange Online**: Microsoft is deprecating basic SMTP
+   > authentication. SMTP AUTH may be disabled at the tenant or mailbox level
+   > (you'll see `535 5.7.139 SmtpClientAuthentication is disabled`). Either
+   > ask your admin to enable it for the sending mailbox, or use a different
+   > sending account (Gmail with app password, a personal SMTP relay, etc.).
+   > A future revision can swap `SmtpEmailDestination` for a MailKit + OAuth2
+   > or Microsoft Graph implementation behind the same interface.
 
 ## Run
 
@@ -86,7 +94,7 @@ Output DLL lands in `bin\Debug\net8.0-windows\RevitScreenshotEmailer.dll`.
 3. **Add-Ins tab → External Tools → Screenshot & Email**.
 4. A dialog confirms the screenshot was sent to `joachim@reope.com`.
 
-The PNG is exported at 1920 px wide, 300 DPI, fit to page horizontally. The
+The PNG is exported at 1920 px wide, fit to page horizontally. The
 temp file is cleaned up after the email is sent.
 
 ## Common errors

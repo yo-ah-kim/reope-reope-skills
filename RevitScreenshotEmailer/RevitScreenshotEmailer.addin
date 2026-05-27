@@ -9,6 +9,5 @@
     <FullClassName>RevitScreenshotEmailer.ScreenshotEmailCommand</FullClassName>
     <VendorId>REOPE</VendorId>
     <VendorDescription>Reope AS</VendorDescription>
-    <VisibilityMode>AlwaysVisible</VisibilityMode>
   </AddIn>
 </RevitAddIns>

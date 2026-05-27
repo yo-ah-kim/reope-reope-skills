@@ -24,8 +24,8 @@ public class ScreenshotEmailCommand : IExternalCommand
         IViewScreenshotter screenshotter,
         Func<IScreenshotDestination> destinationFactory)
     {
-        _screenshotter = screenshotter;
-        _destinationFactory = destinationFactory;
+        _screenshotter = screenshotter ?? throw new ArgumentNullException(nameof(screenshotter));
+        _destinationFactory = destinationFactory ?? throw new ArgumentNullException(nameof(destinationFactory));
     }
 
     public Result Execute(
@@ -48,7 +48,6 @@ public class ScreenshotEmailCommand : IExternalCommand
         }
         catch (Exception ex)
         {
-            message = ex.Message;
             TaskDialog.Show($"{DialogTitle} — Error", ex.Message);
             return Result.Failed;
         }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Autodesk.Revit.DB;
 
 namespace RevitScreenshotEmailer.Capture;
@@ -15,19 +14,24 @@ public sealed class RevitImageScreenshotter : IViewScreenshotter
     public Screenshot Capture(Document document, View view)
     {
         var sessionDirectory = CreateSessionDirectory();
-        var fileStem = Path.Combine(sessionDirectory, FileStemName);
+        try
+        {
+            var fileStem = Path.Combine(sessionDirectory, FileStemName);
+            document.ExportImage(BuildOptions(view, fileStem));
 
-        document.ExportImage(BuildOptions(view, fileStem));
-
-        var pngPath = FindFirstPng(sessionDirectory)
-            ?? throw new InvalidOperationException("Revit did not produce a screenshot file.");
-
-        return new Screenshot(
-            filePath: pngPath,
-            sessionDirectory: sessionDirectory,
-            viewName: view.Name,
-            documentTitle: document.Title,
-            capturedAt: DateTime.Now);
+            var pngPath = ResolveSinglePng(sessionDirectory);
+            return new Screenshot(
+                filePath: pngPath,
+                sessionDirectory: sessionDirectory,
+                viewName: view.Name,
+                documentTitle: document.Title,
+                capturedAt: DateTime.Now);
+        }
+        catch
+        {
+            TryDelete(sessionDirectory);
+            throw;
+        }
     }
 
     private static string CreateSessionDirectory()
@@ -54,9 +58,21 @@ public sealed class RevitImageScreenshotter : IViewScreenshotter
         return options;
     }
 
-    private static string? FindFirstPng(string directory) =>
-        Directory
-            .EnumerateFiles(directory, "*.png", SearchOption.TopDirectoryOnly)
-            .OrderByDescending(File.GetLastWriteTimeUtc)
-            .FirstOrDefault();
+    private static string ResolveSinglePng(string directory)
+    {
+        var pngs = Directory.GetFiles(directory, "*.png", SearchOption.TopDirectoryOnly);
+        return pngs.Length switch
+        {
+            0 => throw new InvalidOperationException("Revit did not produce a screenshot file."),
+            1 => pngs[0],
+            _ => throw new InvalidOperationException(
+                $"Revit produced {pngs.Length} screenshot files; expected exactly one."),
+        };
+    }
+
+    private static void TryDelete(string directory)
+    {
+        try { Directory.Delete(directory, recursive: true); }
+        catch { }
+    }
 }
